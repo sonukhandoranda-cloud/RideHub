@@ -54,3 +54,44 @@ curl -X POST http://localhost:3000/users/register \
     "__v": 0
   }
 }
+
+  ---
+
+  ## Additional Routes (from `routes/user.routes.js`)
+
+  ### POST /users/login
+
+  - **Description**: Authenticate an existing user using email and password. Returns a JWT token and the user object on success.
+
+  ## Request Headers
+  - `Content-Type: application/json`
+
+  ## Request Body (JSON)
+  {
+    "email": "string (required, must be a valid email)",
+    "password": "string (required, min 6)"
+  }
+
+  Field requirements enforced by route validators:
+  - `email`: must be a valid email address.
+  - `password`: minimum length 6.
+
+  ## Responses / Status Codes (login)
+  - 200 OK
+    - Body: `{ "token": "<jwt>", "user": { /* user object (password omitted) */ } }`
+  - 400 Bad Request
+    - Validation errors (missing/invalid fields). Returns `{ errors: [...] }`.
+  - 401 Unauthorized
+    - Invalid email or password.
+  - 500 Internal Server Error
+    - Unexpected server errors.
+
+  ## Example curl (login)
+  ```bash
+  curl -X POST http://localhost:3000/users/login \
+    -H "Content-Type: application/json" \
+    -d '{
+      "email":"jane.doe@example.com",
+      "password":"S3cureP@ss"
+    }'
+  ```
