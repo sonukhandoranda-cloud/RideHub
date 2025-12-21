@@ -100,7 +100,63 @@ curl -X POST http://localhost:3000/users/logout \
 ```
 
 ## Notes (profile & logout)
-- The `logout` endpoint attempts to read the token from `req.cookies.token` or from the `Authorization` header; calling without a token may cause an error.
-- After logout the server clears the `token` cookie and stores the token in the `blacklistToken` collection (see `models/blacklistToken.model.js`).
 
-  ---
+
+## Captains API — routes/captain.routes.js
+
+### POST /captains/register
+
+- **Description**: Create a new captain (driver) account with vehicle details. Password is hashed before saving.
+- **Method**: POST /captains/register
+- **Authentication**: Not required for registration.
+
+## Request Headers
+- `Content-Type: application/json`
+
+## Request Body (JSON)
+{
+  "fullname": { "firstname": "string (required, min 3)", "lastname": "string (optional, min 3)" },
+  "email": "string (required, valid email)",
+  "password": "string (required, min 6)",
+  "vehicles": {
+    "colour": "string (required, min 3)",
+    "plate": "string (required, min 3)",
+    "capacity": "integer (required, min 1)",
+    "vehicleType": "string (required) — one of: 'car', 'motorcycle', 'auto'"
+  }
+}
+
+Field validation enforced by route validators:
+- `fullname.firstname`: required, minimum length 3.
+- `email`: must be a valid email.
+- `password`: minimum length 6.
+- `vehicles.colour`: minimum length 3.
+- `vehicles.plate`: minimum length 3.
+- `vehicles.capacity`: integer, minimum 1.
+- `vehicles.vehicleType`: must be one of `car`, `motorcycle`, or `auto`.
+
+## Responses / Status Codes (captain register)
+- 201 Created
+  - Body: `{ "token": "<jwt>", "captain": { /* captain object (password omitted) */ } }` (if implemented similarly to users)
+- 400 Bad Request
+  - Validation errors: `{ errors: [...] }`.
+- 409 Conflict
+  - Duplicate email (database unique constraint).
+- 500 Internal Server Error
+  - Unexpected server errors.
+
+## Example curl
+```bash
+curl -X POST http://localhost:3000/captains/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "fullname": {"firstname":"John","lastname":"Driver"},
+    "email":"john.driver@example.com",
+    "password":"DriverP@ss1",
+    "vehicles": {"colour":"Blue","plate":"XYZ123","capacity":4,"vehicleType":"car"}
+  }'
+```
+
+## Notes
+- Vehicle type is validated against `['car','motorcycle','auto']` in the route validators.
+- Ensure the server mounts the captain routes at `/captains` (path used above) — adjust the base path if mounted differently in `app.js` or `server.js`.
