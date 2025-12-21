@@ -55,43 +55,52 @@ curl -X POST http://localhost:3000/users/register \
   }
 }
 
+---
+
+## GET /users/profile
+
+- **Description**: Returns the authenticated user's profile.
+- **Method**: GET /users/profile
+- **Authentication**: Required — provide the JWT either in an `Authorization: Bearer <token>` header or as the `token` cookie.
+
+## Responses / Status Codes (profile)
+- 200 OK
+  - Body: the `user` object (password omitted).
+- 401 Unauthorized
+  - Missing or invalid authentication token.
+- 500 Internal Server Error
+  - Unexpected server errors.
+
+## Example curl (profile)
+```bash
+curl -X GET http://localhost:3000/users/profile \
+  -H "Authorization: Bearer <your_jwt_here>"
+```
+
+---
+
+## POST /users/logout
+
+- **Description**: Logs the user out by clearing the `token` cookie and adding the token to a blacklist so it can't be used again.
+- **Method**: POST /users/logout
+- **Authentication**: Should be called with the JWT in the cookie or `Authorization` header so the server can blacklist it.
+
+## Responses / Status Codes (logout)
+- 200 OK
+  - Body: `{ "message": "Logged out successfully" }`
+- 400/401
+  - If no token is provided or token is invalid; client may receive an error depending on how the request is made.
+- 500 Internal Server Error
+  - Unexpected server errors.
+
+## Example curl (logout)
+```bash
+curl -X POST http://localhost:3000/users/logout \
+  -H "Authorization: Bearer <your_jwt_here>"
+```
+
+## Notes (profile & logout)
+- The `logout` endpoint attempts to read the token from `req.cookies.token` or from the `Authorization` header; calling without a token may cause an error.
+- After logout the server clears the `token` cookie and stores the token in the `blacklistToken` collection (see `models/blacklistToken.model.js`).
+
   ---
-
-  ## Additional Routes (from `routes/user.routes.js`)
-
-  ### POST /users/login
-
-  - **Description**: Authenticate an existing user using email and password. Returns a JWT token and the user object on success.
-
-  ## Request Headers
-  - `Content-Type: application/json`
-
-  ## Request Body (JSON)
-  {
-    "email": "string (required, must be a valid email)",
-    "password": "string (required, min 6)"
-  }
-
-  Field requirements enforced by route validators:
-  - `email`: must be a valid email address.
-  - `password`: minimum length 6.
-
-  ## Responses / Status Codes (login)
-  - 200 OK
-    - Body: `{ "token": "<jwt>", "user": { /* user object (password omitted) */ } }`
-  - 400 Bad Request
-    - Validation errors (missing/invalid fields). Returns `{ errors: [...] }`.
-  - 401 Unauthorized
-    - Invalid email or password.
-  - 500 Internal Server Error
-    - Unexpected server errors.
-
-  ## Example curl (login)
-  ```bash
-  curl -X POST http://localhost:3000/users/login \
-    -H "Content-Type: application/json" \
-    -d '{
-      "email":"jane.doe@example.com",
-      "password":"S3cureP@ss"
-    }'
-  ```
