@@ -1,7 +1,10 @@
 
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import axios from 'axios'
+import { UserDataContext } from '../context/UserContext.jsx';
+
 
 const UserSignup = () => {
   const [email, setEmail] = useState('')
@@ -9,19 +12,30 @@ const UserSignup = () => {
   const  [firstname, setFirstname] = useState('')
   const  [lastname, setLastname] = useState('')
   const [userData, setUserData] = useState({})
-  const submitHandler = (e) => {
+
+  const navigate = useNavigate();
+
+  const {user, setUser} = React.useContext(UserDataContext);
+
+  const submitHandler =async (e) => {
     e.preventDefault();
-    setUserData({
-      fullName:  {
-        firstname:firstname,
+   const newUser = {
+      fullname: {
+        firstname:firstname,  
         lastname:lastname
       },
-      email:email,
-      password:password 
-      })
+      email:email,  
+      password:password
+    };
+   try {
+    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/register`, newUser);
 
-    console.log(userData);
-    setEmail('');
+    console.log("SUCESS", response.data);
+    if (response.status === 201) {
+      const data = response.data
+      setUserData(data.user);
+      localStorage.setItem('token',data.token);
+      setEmail('');
     setPassword('');
     setFirstname('');
     setLastname('');
@@ -29,6 +43,17 @@ const UserSignup = () => {
     console.log('Password:', password);
     console.log('First Name:', firstname);
     console.log('Last Name:', lastname);
+      navigate('/home');
+   } 
+       }     catch (error) {
+    console.log("AXIOS ERROR FULL", error);
+    console.log("AXIOS ERROR MSG", error.message);
+    console.log("AXIOS ERROR RESPONSE", error.response?.data);
+
+   }
+
+
+    
     // Here you can handle the signup logic, e.g., send data to the server
   }
   return (
@@ -84,7 +109,7 @@ const UserSignup = () => {
         />
         <button
         className='bg-[#111] text-white font-semibold mb-3 rounded px-2 py-2  w-full text-lg placeholder:text-base'
-        >Login</button>
+        >Create account</button>
       
       </form>
       
