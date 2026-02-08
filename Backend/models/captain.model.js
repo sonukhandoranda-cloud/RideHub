@@ -28,7 +28,7 @@ const captainSchema = new mongoose.Schema({
             select: false,
 
     },
-    SocketId:{
+    socketId:{
          type:String,
     },
      
@@ -70,16 +70,24 @@ const captainSchema = new mongoose.Schema({
     },
 },
 
-location:{
-    lat:{
-        type:Number,
-    },
-    lng:{
-        type:Number,
-    }
-},
 
-})
+  location: {
+    type: {
+      type: String,
+      enum: ["Point"],
+      default: "Point",
+    },
+    coordinates: {
+      type: [Number],
+      required: true
+    },
+  },
+});
+    
+  
+
+
+   
 
 captainSchema.methods.generateAuthToken = function() {
     const token = jwt.sign({_id: this._id}, process.env.JWT_SECRET, { expiresIn: '24h' });

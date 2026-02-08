@@ -113,50 +113,43 @@ curl -X POST http://localhost:3000/users/logout \
 ## Request Headers
 - `Content-Type: application/json`
 
-## Request Body (JSON)
+## Request Body (JSON) — example with inline comments for requirements
+```json
 {
-  "fullname": { "firstname": "string (required, min 3)", "lastname": "string (optional, min 3)" },
-  "email": "string (required, valid email)",
-  "password": "string (required, min 6)",
+  "fullname": {
+    "firstname": "John", // required, min length 3
+    "lastname": "Driver" // optional, if present min length 3
+  },
+  "email": "john.driver@example.com", // required, must be a valid email, unique
+  "password": "DriverP@ss1", // required, min length 6 (will be hashed)
   "vehicles": {
-    "colour": "string (required, min 3)",
-    "plate": "string (required, min 3)",
-    "capacity": "integer (required, min 1)",
-    "vehicleType": "string (required) — one of: 'car', 'motorcycle', 'auto'"
+    "colour": "Blue",     // required, min length 3
+    "plate": "XYZ123",    // required, min length 3
+    "capacity": 4,          // required, integer, min 1
+    "vehicleType": "car"  // required, one of: "car", "motorcycle", "auto"
   }
 }
-
-Field validation enforced by route validators:
-- `fullname.firstname`: required, minimum length 3.
-- `email`: must be a valid email.
-- `password`: minimum length 6.
-- `vehicles.colour`: minimum length 3.
-- `vehicles.plate`: minimum length 3.
-- `vehicles.capacity`: integer, minimum 1.
-- `vehicles.vehicleType`: must be one of `car`, `motorcycle`, or `auto`.
-
-## Responses / Status Codes (captain register)
-- 201 Created
-  - Body: `{ "token": "<jwt>", "captain": { /* captain object (password omitted) */ } }` (if implemented similarly to users)
-- 400 Bad Request
-  - Validation errors: `{ errors: [...] }`.
-- 409 Conflict
-  - Duplicate email (database unique constraint).
-- 500 Internal Server Error
-  - Unexpected server errors.
-
-## Example curl
-```bash
-curl -X POST http://localhost:3000/captains/register \
-  -H "Content-Type: application/json" \
-  -d '{
-    "fullname": {"firstname":"John","lastname":"Driver"},
-    "email":"john.driver@example.com",
-    "password":"DriverP@ss1",
-    "vehicles": {"colour":"Blue","plate":"XYZ123","capacity":4,"vehicleType":"car"}
-  }'
 ```
 
-## Notes
-- Vehicle type is validated against `['car','motorcycle','auto']` in the route validators.
-- Ensure the server mounts the captain routes at `/captains` (path used above) — adjust the base path if mounted differently in `app.js` or `server.js`.
+> Note: JSON does not support comments; the `//` lines above are for documentation only — remove them when sending real JSON.
+
+## Example Success Response (201) — JSON with comments
+```json
+{
+  "token": "eyJhbGci...", // JWT for authenticating captain requests
+  "captain": {
+    "_id": "64abf...",
+    "fullname": { "firstname": "John", "lastname": "Driver" },
+    "email": "john.driver@example.com",
+    "vehicles": {
+      "colour": "Blue",
+      "plate": "XYZ123",
+      "capacity": 4,
+      "vehicleType": "car"
+    },
+    "socketId": null,
+    "__v": 0
+  }
+}
+```
+
