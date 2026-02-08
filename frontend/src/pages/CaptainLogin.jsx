@@ -4,6 +4,7 @@ import { useState } from 'react'
 import {useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import { CaptainDataContext} from '../context/CaptainContext.jsx';
+import {useContext} from "react";
 
 const CaptainLogin = () => {
   const [email, setEmail] = useState('')
@@ -22,6 +23,7 @@ const CaptainLogin = () => {
           const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/captains/login`, captain)
           if(response.status === 200){
             const data = response.data;
+            console.log("LOGIN TAKEN",data.token);
             setCaptain(data.captain);
             localStorage.setItem('token',data.token);
             navigate('/captain-home');

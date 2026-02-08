@@ -42,12 +42,28 @@ const CaptainSignup = () => {
       }
 
       const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/captains/register`, captainData);
-    if (response.status === 201) {
-      const data = response.data
-      setCaptain(data.captain);
-      localStorage.setItem('token',data.token);
-     navigate('/captain-home');
-    }
+      
+
+console.log("FULL RESPONSE:", response);
+console.log("RESPONSE DATA:", response.data);
+console.log("TOKEN:", response.data.token);
+console.log("CAPTAIN:", response.data.captain);
+
+  if (response.status === 201) {
+  setCaptain(response.data.captain);
+
+  localStorage.setItem(
+    "captain",
+    JSON.stringify(response.data.captain)
+  );
+
+  localStorage.setItem(
+    "token",
+    response.data.token
+  );
+
+  navigate("/captain-home");
+}
       
       setEmail('');
       setPassword('');
@@ -175,7 +191,7 @@ const CaptainSignup = () => {
 
        </div>
        <div>
-       <p className='text-[10px] leading-tight' >
+       <p className='text-[10px] mt-6  leading-tight' >
         This site is protected by reCAPTCHA and <span className='underline'> the Google privacy policy </span>  and <span className='underline'>terms of service apply.</span>
        </p>
        </div>
