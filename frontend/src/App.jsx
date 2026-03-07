@@ -3,7 +3,7 @@ import { Route,Routes } from 'react-router-dom'
 import Start from './pages/Start.jsx'
 import UserLogin from './pages/UserLogin.jsx'
 import UserSignup from './pages/UserSignup.jsx'
-import CaptainLogin from './pages/Captainlogin.jsx'
+import CaptainLogin from './pages/CaptainLogin.jsx'
 import CaptainSignup from './pages/CaptainSignup.jsx'
 
 import  UserDataContext  from './context/UserContext.jsx';
