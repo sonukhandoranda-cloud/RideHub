@@ -1,14 +1,17 @@
 import React from 'react'
-import {Link } from 'react-router-dom'
+import {Link, useLocation } from 'react-router-dom'
 import { useState } from 'react';
 import { useRef } from 'react';
 import {useGSAP} from '@gsap/react';
 import gsap from 'gsap';
 import FinishRide from '../components/FinishRide';
+import LiveTracking from '../components/LiveTracking';
 const CaptainRiding = () => {
 
   const [FinishRidePanel,setFinishRidePanel] = useState(false)
   const FinishRidePanelRef = useRef(null)
+  const location = useLocation();
+  const ride = location.state?.ride;
 
    useGSAP(function(){
     if(FinishRidePanel){
@@ -23,18 +26,18 @@ const CaptainRiding = () => {
 },[FinishRidePanel])
   
   return (
-    <div className='h-screen relative'>
+    <div className='h-screen w-full relative'>
        
-       <div className='fixed p-4 top-0 flex items-center justify-between w-screen'>
-        <img className='w-16'src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" alt="" />
-         <Link to='/captain-home' className='   h-10 w-10 bg-white flex items-center justify-center rounded-full'>
+       
+         <div className='fixed p-6 top-0 flex items-center justify-end w-screen z-20'>
+         <Link to='/captain-home' className='   h-10 w-10 bg-white flex items-center justify-center rounded-full '>
                     <i className="text-lg font-medium ri-logout-box-r-line"></i>
                 </Link>
        </div>
-     <div className='h-4/5'>
-        <img className='h-full w-full object-cover' src="https://miro.medium.com/v2/resize:fit:1400/0*gwMx05pqII5hbfmX.gif" alt="" />
+     <div className='absolute top-0 left-0 h-full w-full '>
+        <LiveTracking />
       </div>
-     <div className='h-1/5 p-6 flex items-center justify-between relative bg-yellow-400 pt-10'
+     <div className='absolute bottom-0 left-0 w-full h-[25%]   bg-yellow-400 px-6 py-5 flex flex-col justify-between z-20'
      onClick={() =>{
       setFinishRidePanel(true)
      }}>
@@ -44,8 +47,10 @@ const CaptainRiding = () => {
        <h4 className='text-xl font-semibold'>4 KM away</h4>
        <button className='  bg-green-600 text-white font-semibold p-3  px-10 rounded-lg '>Complete Ride</button>
      </div>
-       <div ref={FinishRidePanelRef} className='fixed w-full z-10 bottom-0 translate-y-full  bg-white px-3 py-10 pt-12'>
-     <FinishRide  setFinishRidePanel={setFinishRidePanel}/>
+       <div ref={FinishRidePanelRef} className='fixed w-full z-50 bottom-0 translate-y-full  bg-white px-3 py-10 pt-12'>
+     <FinishRide 
+     ride={ride}
+     setFinishRidePanel={setFinishRidePanel}/>
         </div> 
 
      </div>

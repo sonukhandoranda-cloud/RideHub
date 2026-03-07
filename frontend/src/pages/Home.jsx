@@ -15,6 +15,7 @@ import { useContext }   from 'react';
 import { useEffect }  from 'react';
 import  {UserDataContext}  from '../context/UserContext';
 import {useNavigate} from 'react-router-dom';
+import LiveTracking from "../components/LiveTracking";
 
 
 
@@ -92,8 +93,9 @@ useEffect(() => {
 
 socket.on('ride-started', ride=>{
   setWaitingForDriver(false);
-  navigate('/riding')
-})
+  
+  navigate('/riding', { state: { ride } });
+});
 
 const handlePickupChange = async (e) => {
   const value = e.target.value;
@@ -267,7 +269,7 @@ async function createRide() {
       
       <div className='h-screen w-screen'>
         {/* image for temp use */}
-        <img className='h-full w-full object-cover' src="https://miro.medium.com/v2/resize:fit:1400/0*gwMx05pqII5hbfmX.gif" alt="" />
+        <LiveTracking />
       </div>
 
       <div className='flex flex-col justify-end h-screen absolute top-0 w-full '>
