@@ -1,6 +1,7 @@
 const rideModel = require('../models/ride.model');
 const mapService = require('./maps.service');
 const crypto = require('crypto');
+const { sendMessageToSocketId } = require('../socket');
 
 
 
@@ -110,56 +111,74 @@ async function confirmRide({ rideId, captain }) {
   return ride;
 }
 
-async function startRide({ rideId, otp, captain }) {
+async function startRide({ ride, otp, captain }) {
   // 1️⃣ Validation
-  if (!rideId || !otp) {
-    throw new Error('Ride id and OTP are required');
-  }
+  
 
   // 2️⃣ Find ride + populate
-  const ride = await rideModel
-    .findOne({ _id: rideId })
+  const rideData = await rideModel
+    .findOne({ _id: ride })
     .populate('user')
     .populate('captain')
     .select('+otp');
 
-  if (!ride) {
+  if (!rideData) {
     throw new Error('Ride not found');
   }
 
   // 3️⃣ Ride status check
-  if (ride.status !== 'accepted') {
+  if (rideData.status !== 'accepted') {
     throw new Error('Ride not accepted');
   }
 
   // 4️⃣ OTP verification
-  if (ride.otp !== otp) {
+  if (rideData.otp !== otp) {
     throw new Error('Invalid OTP');
   }
 
   // 5️⃣ Update ride status
   await rideModel.findOneAndUpdate(
-    { _id: rideId },
+    { _id: ride},
     { status: 'ongoing' }
   );
 
   // 6️⃣ Notify user via socket
-  if (ride.user?.socketId) {
-    sendMessageToSocketId(ride.user.socketId, {
+  if (rideData.user?.socketId) {
+     console.log("CONNECTED socket in termibal:", rideData.user.socketId);
+    sendMessageToSocketId(rideData.user.socketId, {
       event: 'ride-started',
-      data: ride
+      data: rideData
     });
   }
 
   // 7️⃣ Return updated ride
-  return ride;
+  return rideData;
 }
 
+async function endRide({ ride, captain }) {
+  if (!ride) {
+    throw new Error('Ride id is required');
+  }
+  if (!captain) {
+    throw new Error('Captain is required');
+  }
+  const rideData = await rideModel.findOneAndUpdate(
+  { _id: ride, captain: captain._id },
+  { status: 'completed' },
+  { new: true }
+).populate('user');
+
+  if (!rideData) {
+    throw new Error('Ride not found or not assigned to this captain');
+  }
+
+  return rideData;
+}
 
 
 
 /* ---------------- EXPORT ---------------- */
 module.exports = {
-  createRide,getFare,confirmRide,startRide
+  createRide,getFare,confirmRide,startRide,endRide
 };
 

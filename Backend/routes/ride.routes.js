@@ -59,7 +59,7 @@ router.get(
   '/start-ride',
   [
     authMiddleware.authCaptain,
-    query('rideId')
+    query('ride')
       .isMongoId()
       .withMessage('Invalid ride Id'),
     query('otp')
@@ -70,4 +70,9 @@ router.get(
   rideController.startRide
 );
 
+router.post('/end-ride',
+  authMiddleware.authCaptain,
+  body('ride').isMongoId().withMessage('Invalid ride Id'),
+  rideController.endRide
+)
 module.exports = router;

@@ -139,18 +139,41 @@ module.exports.startRide = async function (req, res) {
       errors: errors.array(),
     });
   }
-  const {  rideId, otp } = req.query;
+  const {  ride, otp } = req.query;
 
   try {
-    const ride = await rideService.startRide({ rideId, otp, captain: req.captain._id });
-    sendMessageToSocketId(ride.user.socketId, {
+    const rideData = await rideService.startRide({ ride, otp, captain: req.captain._id });
+    sendMessageToSocketId(rideData.user.socketId, {
       event: "ride-started",
-      data: ride
+      data: rideData    
     });
-    return res.status(200).json(ride);
+    return res.status(200).json(rideData);
   }
   catch (error) {
     return res.status(500).json({ message: error.message });
   }
     
+  }
+
+  module.exports.endRide = async function (req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { ride } = req.body;
+
+    try {
+      const rideData = await rideService.endRide({ ride, captain: req.captain._id });
+
+      sendMessageToSocketId(rideData.user.socketId, {
+        event: "ride-ended",
+        data: rideData    
+      });
+
+      return res.status(200).json(rideData);
+    }
+    catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
   }
