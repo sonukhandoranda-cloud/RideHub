@@ -103,14 +103,16 @@ const handlePickupChange = async (e) => {
   setActiveField('pickup');
   setPanelOpen(true);
 
+  clearTimeout(pickupTimer);
+
+pickupTimer = setTimeout(async () => {
+
   if (value.length < 3) return;
 
   try {
     const response = await axios.post(
       `${import.meta.env.VITE_BASE_URL}/maps/suggestions`,
-      {
-        query: value   // ✅ BODY same as Postman
-      },
+      { query: value },
       {
         headers: {
           'User-Agent': 'uber-clone-college-project'
@@ -118,12 +120,15 @@ const handlePickupChange = async (e) => {
       }
     );
 
-    console.log('SUGGESTIONS:', response.data);
     setPickupSuggestions(response.data);
+
   } catch (error) {
     console.error('Pickup error:', error);
   }
-};
+
+}, 700);
+
+}
 const handleDestinationChange = async (e) => {
     const value = e.target.value;
 
@@ -131,24 +136,24 @@ const handleDestinationChange = async (e) => {
   setActiveField('destination');
   setPanelOpen(true);
 
+   clearTimeout(destinationTimer);
+
+destinationTimer = setTimeout(async () => {
+
   try {
     const response = await axios.post(
       `${import.meta.env.VITE_BASE_URL}/maps/suggestions`,
-       {
-        query: value   // ✅ BODY same as Postman
-      },
-      {
-        headers: {
-          'User-Agent': 'uber-clone-college-project'
-        }
-      }
+      { query: value }
     );
-    setDestinationSuggestions(response.data);
-  } catch (error) {
-    console.error('Destination error',error);
-  }
-};
 
+    setDestinationSuggestions(response.data);
+
+  } catch (error) {
+    console.error('Destination error', error);
+  }
+
+}, 700);
+}
 
 
 
