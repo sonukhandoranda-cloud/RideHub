@@ -106,9 +106,9 @@ const handlePickupChange = async (e) => {
   setActiveField('pickup');
   setPanelOpen(true);
 
-  clearTimeout(pickupTimer);
+  clearTimeout(pickupTimer.current);
 
-pickupTimer = setTimeout(async () => {
+pickupTimer.current = setTimeout(async () => {
 
   if (value.length < 3) return;
 
@@ -139,9 +139,9 @@ const handleDestinationChange = async (e) => {
   setActiveField('destination');
   setPanelOpen(true);
 
-   clearTimeout(destinationTimer);
+   clearTimeout(destinationTimer.current);
 
-destinationTimer = setTimeout(async () => {
+destinationTimer.current= setTimeout(async () => {
 
   try {
     const response = await axios.post(
