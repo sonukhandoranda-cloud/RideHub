@@ -46,6 +46,9 @@ const [captains,setCaptains] = useState(null);
 
 const  {socket } = useContext(SocketContext)
 const {user} = useContext(UserDataContext);
+
+const pickupTimer = useRef(null);
+const destinationTimer = useRef(null);
 console.log("User In HOME", user);
 
 
