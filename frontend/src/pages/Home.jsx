@@ -238,8 +238,8 @@ useGSAP(function(){
 },[waitingForDriver])
 
 async function findTrip(){
-     setVehiclePanel(true)
-     setPanelOpen(false)
+     setVehiclePanel(true);
+     setPanelOpen(false);
 
      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/rides/get-Fare`,{
         params: { pickup, destination},
