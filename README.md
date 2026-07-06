@@ -53,9 +53,9 @@ RideHub is a full-stack ride booking application built using modern web technolo
 - ☁️ MongoDB Atlas for cloud database storage
 - 🚀 Frontend deployed on Vercel and Backend deployed on Render
 
-- ## 📂 Project Structure
+## 📂 Project Structure
 
-text
+```text
 RideHub/
 ├── Backend/
 │   ├── controllers/
@@ -64,12 +64,11 @@ RideHub/
 │   ├── middleware/
 │   ├── services/
 │   └── server.js
-│
 ├── frontend/
 │   ├── src/
 │   ├── public/
 │   ├── assets/
 │   └── package.json
-│
 └── README.md
+```
 
