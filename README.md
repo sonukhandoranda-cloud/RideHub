@@ -129,25 +129,26 @@ http://localhost:3000
 ## 📸 Project Screenshots
 
 ### Start Screen
-![Start Screen](screenshots/start.png)
+![Start Screen](screenshot/start.png)
 
 ### User Login
-![User Login](screenshots/user-login.png)
+![User Login](screenshot/user-login.png)
 
 ### User Signup
-![User Signup](screenshots/User-signup.png)
+![User Signup](screenshot/User-signup.png)
 
 ### Captain Login
-![Captain Login](screenshots/Captain-login.png)
+![Captain Login](screenshot/Captain-login.png)
 
 ### Captain Signup
-![Captain Signup](screenshots/Captain-signup.png)
+![Captain Signup](screenshot/Captain-signup.png)
 
-### Book Ride
-![Book Ride](screenshots/Ride.png)
+### Ride Booking
+![Ride Booking](screenshot/Ride.png)
 
 ### User Riding
-![User Riding](screenshots/User-riding.png)
+![User Riding](screenshot/User-riding.png)
+
 ## 🚀 Deployment
 
 ### Live Application
