@@ -5,9 +5,7 @@
 
 RideHub is a full-stack ride booking application built using modern web technologies. It provides secure authentication, ride booking, real-time location tracking, distance-based fare calculation, and live ride updates using Socket.io. The application includes separate interfaces for users and captains, Google Maps integration, JWT authentication, and a responsive user experience. The frontend is deployed on Vercel, the backend is deployed on Render, and MongoDB Atlas is used for data storage.
 
-## 📚 Table of Contents
 
-- [Tech Stack](#-tech-stack)
 
 - ## 📚 Table of Contents
 
@@ -24,5 +22,18 @@ RideHub is a full-stack ride booking application built using modern web technolo
 - [Installation](#-installation)
 - [Run the Application](#-run-the-application)
 - [Deployment](#-deployment)
+
+## 🛠️ Tech Stack
+
+| Category | Technologies |
+|----------|--------------|
+| Frontend | React.js, HTML5, CSS3, JavaScript |
+| Backend | Node.js, Express.js |
+| Database | MongoDB Atlas |
+| Authentication | JWT, bcrypt |
+| Maps | Google Maps API |
+| Real-Time Communication | Socket.IO |
+| Deployment | Vercel (Frontend), Render (Backend) |
+| Tools | Git, GitHub, Postman, VS Code |
 - [Environment Variables](#-environment-variables)
 - [Screenshots](#-screenshots)
