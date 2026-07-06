@@ -272,7 +272,10 @@ async function createRide() {
 }
 
   return (
-    <div className='h-screen relative'>
+        <div className="w-full h-screen bg-gray-200 flex justify-center items-center">
+    <div className="w-[375px] h-screen bg-white overflow-hidden relative">
+
+      <div className='h-screen relative'>
        <h1 className="text-2xl font-bold px-4 py-4">
   RideHub
 </h1>
@@ -383,6 +386,8 @@ async function createRide() {
 
         
         </div>
+    </div>
+    </div>
     </div>
  )
 }

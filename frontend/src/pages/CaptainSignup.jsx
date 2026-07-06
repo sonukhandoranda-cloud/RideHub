@@ -93,7 +93,9 @@ console.log("CAPTAIN:", response.data.captain);
     <div>
     <div className='py-5 px-5 h-screen flex flex-col justify-between'>
        <div>
-         <img className='w-16  mb-3' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSVCO4w_adxK32rCXFeKq3_NbLcR9b_js14w&s" alt="" />
+         <h1 className="text-2xl font-semiboldbold px-4 py-4">
+  RideHub
+</h1>
       <form onSubmit={(e)=>submitHandler(e)}>
      <h3 className='text-lg w-full font-medium mb-2'>What's our captain's name</h3>
      <div className='flex gap-4' mb-6>
