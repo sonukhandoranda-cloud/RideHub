@@ -152,13 +152,13 @@ https://uber-clone-ktqe.onrender.com
 
 Create a .env file inside the *Backend* folder.
 
-env
+```env
 PORT=3000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 MAIL_USER=your_email
 MAIL_PASS=your_app_password
-
+```
 
 ## 👨‍💻 Author
 
