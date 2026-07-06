@@ -57,7 +57,9 @@ const Riding = () => {
       <div className="absolute -bottom-12 w-full bg-white pt-0 px-2 pb-6 rounded-t-3xl">
       <div className='flex-1 p-4 pb-8'>
        <div className='flex items-center justify-between'>
-        <img className='h-12' src="https://www.pngplay.com/wp-content/uploads/8/Uber-PNG-Photos.png" alt="" />
+         <h1 className="text-2xl font-semibold px-4 py-4">
+  RideHub
+</h1>
         <div className='text-right'>
             <h2 className='text-lg font-medium capitalize'>{ride?.captain?.fullname?.firstname}</h2>
             <h4 className='text-xl font-semibold -mt-1 -mb-1'>{ride?.captain?.vehicles?.plate}</h4>

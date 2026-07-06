@@ -15,7 +15,9 @@ const WaitingForDriver = (props ) => {
      }}><i className="text-3xl text-gray-200 ri-arrow-down-wide-line"></i></h5>
         
        <div className='flex items-center justify-between'>
-        <img className='h-12' src="https://www.pngplay.com/wp-content/uploads/8/Uber-PNG-Photos.png" alt="" />
+         <h1 className="text-2xl font-semibold px-4 py-4">
+  RideHub
+</h1>
         <div className='text-right'>
             <h2 className='text-lg font-medium'>{props.ride?.captain?.fullname?.firstname} </h2>
             <h4 className='text-xl font-semibold -mt-1 -mb-1'>{props.ride?.captain?.vehicles?.plate}</h4>

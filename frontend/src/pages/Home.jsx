@@ -273,8 +273,9 @@ async function createRide() {
 
   return (
     <div className='h-screen relative'>
-      <img className='w-16 absolute left-5 top-5' src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" alt="Uber Logo" />
-      
+       <h1 className="text-2xl font-bold px-4 py-4">
+  RideHub
+</h1>
       <div className='h-screen w-screen'>
         {/* image for temp use */}
         <LiveTracking />
