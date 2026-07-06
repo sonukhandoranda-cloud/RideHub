@@ -8,6 +8,17 @@ RideHub is a full-stack ride booking application built using modern web technolo
 ## 📚 Table of Contents
 
 - [Tech Stack](#-tech-stack)
+
+- ## 📚 Table of Contents
+
+- [Tech Stack](#-tech-stack)
+- [Features](#-features)
+- [Project Structure](#-project-structure)
+- [Installation](#-installation)
+- [Run the Application](#-run-the-application)
+- [Deployment](#-deployment)
+- [Environment Variables](#-environment-variables)
+- [Screenshots](#-screenshots)
 - [Features](#-features)
 - [Project Structure](#-project-structure)
 - [Installation](#-installation)
