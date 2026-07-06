@@ -153,7 +153,7 @@ https://uber-clone-ktqe.onrender.com
 Create a .env file inside the *Backend* folder.
 
 ```env
-PORT=3000
+PORT=4000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 MAIL_USER=your_email
