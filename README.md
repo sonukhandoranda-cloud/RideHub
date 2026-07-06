@@ -146,3 +146,27 @@ https://uber-clone-1-o0gy.onrender.com
 
 ### Alternative Deployment
 https://uber-clone-ktqe.onrender.com
+
+
+## 🔑 Environment Variables
+
+Create a .env file inside the *Backend* folder.
+
+env
+PORT=3000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+MAIL_USER=your_email
+MAIL_PASS=your_app_password
+
+
+## 👨‍💻 Author
+
+*Sana Perween*
+
+- GitHub: https://github.com/sonukhandoranda-cloud
+- LinkedIn: https://www.linkedin.com/in/sana-perween-bit
+
+---
+
+⭐ If you found this project helpful, please consider giving it a star on GitHub.
