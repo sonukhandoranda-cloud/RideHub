@@ -125,6 +125,29 @@ The backend will run at:
 http://localhost:3000
 ```
 
+
+## 📸 Project Screenshots
+
+### Start Screen
+![Start Screen](screenshots/start.png)
+
+### User Login
+![User Login](screenshots/user-login.png)
+
+### User Signup
+![User Signup](screenshots/User-signup.png)
+
+### Captain Login
+![Captain Login](screenshots/Captain-login.png)
+
+### Captain Signup
+![Captain Signup](screenshots/Captain-signup.png)
+
+### Book Ride
+![Book Ride](screenshots/Ride.png)
+
+### User Riding
+![User Riding](screenshots/User-riding.png)
 ## 🚀 Deployment
 
 ### Live Application
