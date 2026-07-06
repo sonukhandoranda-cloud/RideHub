@@ -78,7 +78,7 @@ RideHub/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/sonukhandoranda-cloud>/RideHub.git
+git clone https://github.com/sonukhandoranda-cloud/RideHub.git
 cd RideHub
 ```
 
@@ -97,3 +97,52 @@ npm install
 cd ../Backend
 npm install
 ```
+## ▶️ Run the Application
+
+### Frontend
+
+```bash
+cd frontend
+npm run dev
+```
+
+### Backend
+
+``bash
+cd Backend
+npm run dev
+```
+
+The frontend will run at:
+
+```text
+http://localhost:5173
+```
+
+The backend will run at:
+
+```text
+http://localhost:3000
+```
+
+## 🚀 Deployment
+
+### Live Application
+
+- *Frontend (Vercel):* https://uber-clone-ktqe.onrender.com
+ 
+- *Backend (Render):* https://uber-clone-1-o0gy.onrender.com
+
+### Deployment Platforms
+
+- Frontend deployed using *Vercel*
+- Backend deployed using *Render*
+- Database hosted on *MongoDB Atlas*
+
+- ## 🚀 Open the Application
+
+### Live Application
+https://uber-clone-1-o0gy.onrender.com
+
+### Alternative Deployment
+https://uber-clone-ktqe.onrender.com
