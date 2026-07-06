@@ -129,7 +129,7 @@ http://localhost:3000
 
 ### Live Application
 
-- *Frontend (Vercel):* https://uber-clone-ktqe.onrender.com
+- *Frontend (Render):* https://uber-clone-ktqe.onrender.com
  
 - *Backend (Render):* https://uber-clone-1-o0gy.onrender.com
 
